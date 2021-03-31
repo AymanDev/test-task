@@ -1,0 +1,13 @@
+@import '../../styles/colors';
+
+.container {
+    display: flex;
+}
+
+.star {
+    color: $gray-color;
+
+    &.active {
+        color: $primary-color;
+    }
+}

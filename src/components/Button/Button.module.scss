@@ -1,0 +1,18 @@
+@import '../../styles/colors';
+
+.button {
+    padding: 5px;
+
+    border: darken($gray-color, 25%) 1px solid;
+    background: $gray-color;
+    color: $white-color;
+
+    &[type='submit'] {
+        border: darken($submit-color, 25%) 1px solid;
+        background: $submit-color;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}

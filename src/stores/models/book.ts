@@ -1,4 +1,4 @@
-import { Instance, types } from 'mobx-state-tree';
+import { Instance, SnapshotIn, SnapshotOut, types } from 'mobx-state-tree';
 
 export const Review = types.model('Review', {
     id: types.identifierNumber,
@@ -28,5 +28,8 @@ const Book = types.model('Book', {
     noteIds: types.optional(types.array(Note), []),
 });
 export type BookModel = Instance<typeof Book>;
+export type BookSnapshot = BookSnapshotIn | BookSnapshotOut;
+export type BookSnapshotIn = SnapshotIn<typeof Book>;
+export type BookSnapshotOut = SnapshotOut<typeof Book>;
 
 export default Book;

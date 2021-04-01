@@ -1,0 +1,93 @@
+@import '../../styles/colors';
+
+.container {
+    background: $main-background-color;
+
+    padding: 50px;
+
+    height: 100%;
+
+    display: grid;
+    grid-template-areas:
+        'title title title title title'
+        'cover rating none none info'
+        'cover description description - info'
+        'controls description description - info';
+    grid-template-columns: 330px 25% 25% auto;
+    grid-template-rows: 75px 250px 250px auto;
+}
+
+.title {
+    font-size: 32px;
+    background: $gray-color;
+    color: $white-color;
+    padding: 10px;
+
+    grid-area: title;
+}
+
+.cover {
+    margin-top: 20px;
+
+    max-width: 330px;
+    width: 100%;
+    object-fit: contain;
+
+    grid-area: cover;
+}
+
+.rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 32px;
+
+    grid-area: rating;
+
+    .ratingTitle {
+        font-size: 22px;
+
+        margin-bottom: 10px;
+    }
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    grid-area: controls;
+}
+
+.description {
+    padding: 10px;
+
+    grid-area: description;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 20px;
+
+    grid-area: info;
+
+    .infoTitle {
+        font-size: 26px;
+    }
+
+    .label {
+        padding: 3px;
+
+        background: $gray-color;
+        color: $white-color;
+    }
+}
+
+.form {
+    width: 100%;
+    .submitButton {
+        width: 100%;
+    }
+}

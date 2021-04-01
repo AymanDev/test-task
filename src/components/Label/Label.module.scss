@@ -1,0 +1,13 @@
+@import '../../styles/colors';
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    padding: 3px;
+
+    background: $gray-color;
+    color: $white-color;
+}

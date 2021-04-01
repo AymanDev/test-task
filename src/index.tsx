@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import IndexPage from './pages/IndexPage/IndexPage';
+import IndexPage from './pages/IndexPage';
+import BookPage from './pages/BookPage';
+
 import reportWebVitals from './reportWebVitals';
 import { Provider, rootStore } from './stores/RootStore';
 
@@ -13,8 +15,11 @@ ReactDOM.render(
         <Provider value={rootStore}>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/">
+                    <Route exact path="/">
                         <IndexPage />
+                    </Route>
+                    <Route exact path="/book/:id">
+                        <BookPage />
                     </Route>
                 </Switch>
             </BrowserRouter>

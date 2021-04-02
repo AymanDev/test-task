@@ -3,15 +3,18 @@ import { createContext, useContext } from 'react';
 
 import IndexPageStore from './IndexPageStore';
 import BookPageStore from './BookPageStore';
+import AddBookPageStore from "./AddBookPageStore";
 
 const RootModel = types.model({
     indexPageStore: IndexPageStore,
     bookPageStore: BookPageStore,
+    addBookPageStore: AddBookPageStore,
 });
 
 const initialState = RootModel.create({
     indexPageStore: { mainLoader: {} },
     bookPageStore: { mainLoader: {} },
+    addBookPageStore: { mainLoader: {} },
 });
 
 export const rootStore = initialState;

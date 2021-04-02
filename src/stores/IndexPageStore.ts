@@ -1,6 +1,6 @@
 import { cast, flow, types } from 'mobx-state-tree';
 
-import Book, { BookSnapshot } from './models/book';
+import Book, { BookSnapshot } from './models/Book';
 import Loader from './models/Loader';
 import { getBooksList } from '../fakeAPI';
 

@@ -12,17 +12,12 @@
         'title title title title title'
         'cover rating none none info'
         'cover description description - info'
-        'controls description description - info';
+        'controls reviews reviews - info';
     grid-template-columns: 330px 25% 25% auto;
     grid-template-rows: 75px 250px 250px auto;
 }
 
 .title {
-    font-size: 32px;
-    background: $gray-color;
-    color: $white-color;
-    padding: 10px;
-
     grid-area: title;
 }
 
@@ -46,7 +41,7 @@
 
     grid-area: rating;
 
-    .ratingTitle {
+    .title {
         font-size: 22px;
 
         margin-bottom: 10px;
@@ -73,7 +68,7 @@
 
     grid-area: info;
 
-    .infoTitle {
+    .title {
         font-size: 26px;
     }
 
@@ -89,5 +84,15 @@
     width: 100%;
     .submitButton {
         width: 100%;
+    }
+}
+
+.reviews {
+    grid-area: reviews;
+
+    padding-left: 10px;
+
+    .title {
+        margin-bottom: 5px;
     }
 }

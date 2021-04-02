@@ -1,0 +1,29 @@
+@import '../../styles/colors';
+
+.container {
+    background: rgba($gray-color, 0.25);
+
+    margin-bottom: 5px;
+
+    border: $primary-color 1px solid;
+}
+
+.title {
+    background: $gray-color;
+    color: $white-color;
+
+    padding: 5px;
+
+    display: flex;
+    justify-content: space-between;
+
+    .info {
+        font-size: 13px;
+    }
+}
+
+.text {
+    padding: 5px;
+
+    background: rgba($gray-color, 0.25);
+}

@@ -1,13 +1,13 @@
 import { cast, flow, types } from 'mobx-state-tree';
 
-import Book, { BookSnapshot } from './models/book';
+import Book, { BookSnapshot, placeholderBook } from './models/Book';
 import Loader from './models/Loader';
 
 import { getBookById, updateBook } from '../fakeAPI';
 
 const BookPageStore = types
     .model('BookPageStore', {
-        book: types.maybe(Book),
+        book: types.optional(Book, placeholderBook),
         mainLoader: Loader,
     })
     .actions(self => {

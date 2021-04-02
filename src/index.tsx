@@ -4,6 +4,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import IndexPage from './pages/IndexPage';
 import BookPage from './pages/BookPage';
+import AddBookPage from './pages/AddBookPage';
+
+import Menu from './components/Menu';
 
 import reportWebVitals from './reportWebVitals';
 import { Provider, rootStore } from './stores/RootStore';
@@ -14,12 +17,17 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider value={rootStore}>
             <BrowserRouter>
+                <Menu />
                 <Switch>
                     <Route exact path="/">
                         <IndexPage />
                     </Route>
                     <Route exact path="/book/:id">
                         <BookPage />
+                    </Route>
+
+                    <Route exact path="/add-book">
+                        <AddBookPage />
                     </Route>
                 </Switch>
             </BrowserRouter>

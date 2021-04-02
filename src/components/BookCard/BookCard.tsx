@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BookModel } from '../../stores/models/book';
+import { BookModel } from '../../stores/models/Book';
 
 import styles from './BookCard.module.scss';
 import RatingBar from '../RatingBar';

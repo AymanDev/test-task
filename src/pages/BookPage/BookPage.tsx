@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Field, Form, Formik } from 'formik';
+import { observer } from 'mobx-react-lite';
 
 import { useMountEffect } from '../../hooks';
 import { useMst } from '../../stores/RootStore';
 
-import { observer } from 'mobx-react-lite';
 import Spinner from '../../components/Spinner';
 import RatingBar from '../../components/RatingBar';
-import { BookModel, BookSnapshotIn } from '../../stores/models/book';
 import Label from '../../components/Label';
+import Button from '../../components/Button';
+import BookForm from '../../components/forms/BookForm';
+import Title from '../../components/Title';
+import Note from '../../components/Note';
+import ReviewCard from '../../components/ReviewCard';
 
 import styles from './BookPage.module.scss';
-import Button from '../../components/Button';
-import { getSnapshot } from 'mobx-state-tree';
 
 const ratingNames = ['Очень плохо', 'Плохо', 'Нормально', 'Хорошо', 'Отлично'];
 
@@ -34,79 +35,44 @@ const BookPage = () => {
     return (
         <Spinner loading={mainLoader.loading}>
             <div className={styles.container}>
-                <div className={styles.title}>{book?.name || ''}</div>
+                <Title className={styles.title}>{book?.name || ''}</Title>
                 <img className={styles.cover} src={book?.cover} alt={`book cover ${book?.name}`} />
                 <div className={styles.controls}>
                     <Button onClick={handleOnChangeClick}>Изменить</Button>
-                    {areEditing && book && <BookForm book={book} />}
+                    {areEditing && book && <BookForm initialBook={book} />}
                 </div>
                 <div className={styles.rating}>
-                    <div className={styles.ratingTitle}>{ratingNames[rating - 1]}</div>
+                    <div className={styles.title}>{ratingNames[rating - 1]}</div>
                     <RatingBar value={rating} />
                 </div>
                 <div className={styles.description}>{book?.description}</div>
                 <div className={styles.info}>
-                    <div className={styles.infoTitle}>Инфо</div>
+                    <div className={styles.title}>Инфо</div>
                     <Label title="Автор: ">{book?.author}</Label>
                     <Label title="Издатель: ">{book?.publisher}</Label>
                     <Label title="Год выхода: ">{book?.releaseYear}</Label>
-                    <Label title="Количество страниц: ">{book?.pageCount}</Label>
+                    {book.pageCount && <Label title="Количество страниц: ">{book.pageCount}</Label>}
                     <Label title="ISBN: ">{book?.isbnCode}</Label>
+                    {book.notes.length > 0 && (
+                        <Label title="Заметки:">
+                            {book.notes.map(n => (
+                                <Note key={n.id} {...n} />
+                            ))}
+                        </Label>
+                    )}
                 </div>
+
+                {book.reviews.length > 0 && (
+                    <div className={styles.reviews}>
+                        <Label className={styles.title} title="Отзывы" />
+                        {book.reviews.map(r => (
+                            <ReviewCard key={r.id} {...r} />
+                        ))}
+                    </div>
+                )}
             </div>
         </Spinner>
     );
 };
-
-type Props = {
-    book: BookModel;
-};
-const BookForm: React.FC<Props> = observer(({ book }) => {
-    const {
-        bookPageStore: { fetchUpdateBook },
-    } = useMst();
-
-    const handleSubmit = async (values: BookSnapshotIn) => {
-        console.log(values);
-        await fetchUpdateBook(values);
-    };
-
-    return (
-        <Formik initialValues={{ ...getSnapshot(book) }} onSubmit={handleSubmit}>
-            <Form className={styles.form}>
-                <Label title="Title">
-                    <Field as="input" name="name" type="text" />
-                </Label>
-                <Label title="Cover">
-                    <Field as="input" name="cover" type="text" />
-                </Label>
-                <Label title="Rating">
-                    <Field as="input" name="rating" type="number" />
-                </Label>
-                <Label title="Description">
-                    <Field as="textarea" name="description" />
-                </Label>
-                <Label title="Author">
-                    <Field as="input" name="author" type="text" />
-                </Label>
-                <Label title="Publisher">
-                    <Field as="input" name="publisher" type="text" />
-                </Label>
-                <Label title="Year">
-                    <Field as="input" name="releaseYear" type="number" />
-                </Label>
-                <Label title="Pages">
-                    <Field as="input" name="pageCount" type="number" />
-                </Label>
-                <Label title="ISBN">
-                    <Field as="input" name="isbnCode" type="number" />
-                </Label>
-                <Button className={styles.submitButton} type="submit">
-                    Сохранить
-                </Button>
-            </Form>
-        </Formik>
-    );
-});
 
 export default observer(BookPage);
